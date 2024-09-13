@@ -10,7 +10,13 @@ from nltk.corpus import stopwords
 rf_loaded = load('random_forest_classifier.joblib')
 tv_loaded = load('tfidfVectorizer.joblib')
 
-stop_words = set(stopwords.words('english'))
+
+# Check if stopwords are available and download if necessary
+try:
+    stop_words = set(stopwords.words('english'))
+except LookupError:
+    nltk.download('stopwords')
+    stop_words = set(stopwords.words('english'))
 
 # Create a function to clean text
 def processWord(script):
