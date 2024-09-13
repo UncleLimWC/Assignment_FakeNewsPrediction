@@ -10,7 +10,12 @@ rf_loaded = load('random_forest_classifier.joblib')
 tv_loaded = load('tfidfVectorizer.joblib')
 
 
-stop_words = set(stopwords.words('english'))
+# Try to load stopwords, and download if not available
+try:
+    stop_words = set(stopwords.words('english'))
+except LookupError:
+    nltk.download('stopwords')
+    stop_words = set(stopwords.words('english'))
 
 # Create a function to clean text
 def processWord(script):
