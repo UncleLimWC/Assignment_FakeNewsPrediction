@@ -3,28 +3,41 @@ from joblib import load
 import pandas as pd
 import re
 import string
+from nltk.corpus import stopwords
 
 # Load your logistic regression model and tdidfVectorizer 
 rf_loaded = load('random_forest_classifier.joblib')
 tv_loaded = load('tfidfVectorizer.joblib')
 
+stop_words = set(stopwords.words('english'))
+
 # Create a function to clean text
-def wordopt(text):
-    text = text.lower()  # Lower case 
-    text = re.sub('\[.*?\]', '', text)  # Remove anything with and within brackets
-    text = re.sub('\\W', ' ', text)  # Removes any character not a letter, digit, or underscore
-    text = re.sub('https?://\S+|www\.\S+', '', text)  # Removes any links starting with https
-    text = re.sub('<.*?>+', '', text)  # Removes anything with and within < >
-    text = re.sub('[%s]' % re.escape(string.punctuation), '', text)  # Removes any string with % in it 
-    text = re.sub('\n', '', text)  # Remove new lines
-    text = re.sub('\w*\d\w*', '', text)  # Removes any string that contains at least a digit with zero or more characters
-    return text
+def processWord(script):
+    # lower case 
+    script = script.lower() 
+    # remove anything with and within brackets
+    script = re.sub('\[.*?\]','', script) 
+    # removes any character not a letter, digit, or underscore
+    script = re.sub('\\W',' ',script) 
+    # removes any links starting with https
+    script= re.sub('https?://\S+|www\.\S+','',script) 
+    # removes anything with and within < >
+    script = re.sub('<.*?>+','', script) 
+    # removes any string with % in it
+    script = re.sub('[%s]' % re.escape(string.punctuation), '', script)  
+    # remove next lines
+    script = re.sub('\n','',script)
+    # removes any string that contains at least a digit with zero or more characters
+    script = re.sub('\w*\d\w*','', script)
+    #remove stopwords (split the script(text class) -> filter out stopwords ->  join the words)
+    script = ' '.join([word for word in script.split() if word not in stop_words])
+    return script
 
 # Prediction function 
 def news_prediction(news):
     testing_news = {"text": [news]}
     new_def_test = pd.DataFrame(testing_news)
-    new_def_test['text'] = new_def_test['text'].apply(wordopt)
+    new_def_test['text'] = new_def_test['text'].apply(processWord)
     new_x_test = new_def_test['text']
     new_tfidf_test = tv_loaded.transform(new_x_test)
     pred_lr = lr_loaded.predict(new_tfidf_test)
