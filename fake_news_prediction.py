@@ -5,6 +5,8 @@ import re
 import string
 from nltk.corpus import stopwords
 
+nltk.download('stopwords')
+
 # Load random_forest_classifier and tdidfVectorizer 
 rf_loaded = load('random_forest_classifier.joblib')
 tv_loaded = load('tfidfVectorizer.joblib')
