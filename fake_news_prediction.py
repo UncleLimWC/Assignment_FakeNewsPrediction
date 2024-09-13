@@ -47,9 +47,9 @@ def news_prediction(news):
     new_def_test['text'] = new_def_test['text'].apply(processWord)
     new_x_test = new_def_test['text']
     new_tfidf_test = tv_loaded.transform(new_x_test)
-    pred_lr = lr_loaded.predict(new_tfidf_test)
+    pred_rf = rf_loaded.predict(new_tfidf_test)
     
-    if pred_lr[0] == 0:
+    if pred_rf[0] == 0:
         return "This is Fake News! Don't Listen what the kopitiam uncle and aunty say."
     else:
         return "The News seems to be True!"
