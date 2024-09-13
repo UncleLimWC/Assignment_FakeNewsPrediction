@@ -5,8 +5,8 @@ import re
 import string
 from nltk.corpus import stopwords
 
-# Load logistic regression and tdidfVectorizer 
-lr_loaded = load('logistic_regression_model.joblib')
+# Load random_forest_classifier and tdidfVectorizer 
+rf_loaded = load('random_forest_classifier.joblib')
 tv_loaded = load('tfidfVectorizer.joblib')
 
 
@@ -41,7 +41,7 @@ def news_prediction(news):
     new_def_test['text'] = new_def_test['text'].apply(processWord)
     new_x_test = new_def_test['text']
     new_tfidf_test = tv_loaded.transform(new_x_test)
-    pred_lr = lr_loaded.predict(new_tfidf_test)
+    pred_rf = rf_loaded.predict(new_tfidf_test)
     
     if pred_lr[0] == 0:
         return "This is Fake News! Don't Listen what the kopitiam uncle and aunty say."
