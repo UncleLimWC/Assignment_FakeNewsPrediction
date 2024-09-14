@@ -58,7 +58,7 @@ def news_prediction(news):
 def main():
     # Title of web app
     st.title("Fake News Prediction System")
-    user_text = st.text_area("Enter a sentence to check if it's true or fake:", height=350)
+    user_text = st.text_area("Enter or copy a news article to check if it's true or fake:", height=350)
    
     if st.button("Predict"):
         if user_text.strip():  # Check if the input text is not just empty or spaces
