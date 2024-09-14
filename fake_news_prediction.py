@@ -6,7 +6,7 @@ import string
 import nltk
 from nltk.corpus import stopwords
 
-# Load your logistic regression model and tdidfVectorizer 
+# Load your random_forest+classifier model and tdidfVectorizer 
 rf_loaded = load('random_forest_classifier.joblib')
 tv_loaded = load('tfidfVectorizer.joblib')
 
