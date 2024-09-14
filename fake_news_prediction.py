@@ -6,7 +6,7 @@ import string
 import nltk
 from nltk.corpus import stopwords
 
-# Load your random_forest+classifier model and tdidfVectorizer 
+# Load random forest classifier model and tdidfVectorizer 
 rf_loaded = load('random_forest_classifier.joblib')
 tv_loaded = load('tfidfVectorizer.joblib')
 
@@ -56,7 +56,7 @@ def news_prediction(news):
 
 # Streamlit application starts here 
 def main():
-    # Title of your web app
+    # Title of web app
     st.title("Fake News Prediction System")
     user_text = st.text_area("Enter a sentence to check if it's true or fake:", height=350)
    
