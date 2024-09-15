@@ -44,7 +44,7 @@ def processWord(script):
 def news_prediction(news):
     testing_news = {"text": [news]}
     new_def_test = pd.DataFrame(testing_news)
-    new_def_test['text'] = new_def_test['text'].apply(script)
+    new_def_test['text'] = new_def_test['text'].apply(processWord)
     new_x_test = new_def_test['text']
     new_tfidf_test = tv_loaded.transform(new_x_test)
     pred_rf = rf_loaded.predict(new_tfidf_test)
