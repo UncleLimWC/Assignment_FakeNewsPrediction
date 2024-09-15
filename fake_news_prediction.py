@@ -58,6 +58,8 @@ def news_prediction(news):
 def main():
     # Title of web app
     st.title("Fake News Prediction System")
+    st.write("""This app predicts if a news article contains Fake News or not. Just copy the news into the following box
+            and click on the predict button.""")
     user_text = st.text_area("Enter or copy a news article to check if it's true or fake:", height=350)
    
     if st.button("Predict"):
