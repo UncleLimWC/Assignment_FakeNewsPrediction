@@ -56,6 +56,8 @@ def news_prediction(news):
 
 # Streamlit application starts here 
 def main():
+    # Display the image at the top of the page
+    st.image('fakenews.jpeg', use_column_width=True)
     # Title of web app
     st.title("Fake News Prediction System")
     st.write("""This app predicts if a news article contains Fake News or not. Just copy the news into the following box
